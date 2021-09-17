@@ -22,6 +22,7 @@ const Messages: React.FC = () => {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
+          animation: 'slide_from_right',
         }}
       >
         <Stack.Screen name="MessageList" component={MessageList} />
