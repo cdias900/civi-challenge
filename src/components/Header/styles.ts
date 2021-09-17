@@ -16,6 +16,7 @@ export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1px;
+  color: ${({ theme }) => theme.black};
 `;
 
 export const BackButton = styled.TouchableOpacity`

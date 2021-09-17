@@ -6,8 +6,7 @@ export const MessageContainer = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 8px 0;
-  padding-left: 8px;
+  padding: 8px;
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-color: ${({ theme }) => theme.gray};
 `;
@@ -28,7 +27,7 @@ export const Detail = styled.Text.attrs({
   numberOfLines: 1,
 })`
   font-size: 14px;
-  color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.gray};
 `;
 
 export const Timestamp = styled.Text`

@@ -1,11 +1,11 @@
 import { DefaultTheme } from 'styled-components';
 
 const ThemeDefault: DefaultTheme = {
-  blue: '#3F54D1',
-  black: '#1C1C1C',
+  blue: '#407BFF',
+  black: '#1F222E',
   white: '#FFF',
-  offWhite: '#F1F4F9',
-  gray: '#898989',
+  offWhite: '#FBFBFB',
+  gray: '#A1A4AC',
 };
 
 export default ThemeDefault;

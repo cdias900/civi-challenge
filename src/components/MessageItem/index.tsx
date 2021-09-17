@@ -24,11 +24,16 @@ const MessageItem: React.FC<IMessageItemProps> = ({
   item,
   handleClickMessage,
 }) => {
+  // Get theme context
   const themeContext = useContext(ThemeContext);
 
   return (
     <MessageContainer onPress={() => handleClickMessage(item)}>
-      <MaterialIcon size={14} name="circle" color={themeContext.blue} />
+      <MaterialIcon
+        size={14}
+        name="circle"
+        color={item.read ? themeContext.offWhite : themeContext.blue}
+      />
       <TextContainer>
         <Subject>{item.content.subject}</Subject>
         <Detail>{item.content.detail}</Detail>

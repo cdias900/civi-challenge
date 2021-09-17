@@ -9,8 +9,10 @@ import { UpperContainer, Content } from '../styles';
 import { Text } from './styles';
 
 const MessageDetail: React.FC = () => {
+  // Get message context data
   const { selectedMessage } = useMessages();
 
+  // Get theme context
   const themeContext = useContext(ThemeContext);
 
   return (

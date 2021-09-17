@@ -16,32 +16,49 @@ import { IMessageRoutes } from '..';
 const MessageList: React.FC<
   NativeStackScreenProps<IMessageRoutes, 'MessageList'>
 > = ({ navigation }) => {
-  const { messages, setMessages, setSelectedMessage } = useMessages();
-  const [loading, setLoading] = useState(false);
+  // Get message context data
+  const { messages, updateMessages, readMessage } = useMessages();
+  const [refreshing, setRefreshing] = useState(false);
+  const [page, setPage] = useState(1);
 
+  // Get theme context
   const themeContext = useContext(ThemeContext);
 
+  // Mark message as read and navigate to message detail screen
   const handleClickMessage = (message: IMessage) => {
-    setSelectedMessage(message);
+    readMessage(message);
     navigation.navigate('MessageDetail');
   };
 
+  // Render message items
   const handleRenderItem: ListRenderItem<IMessage> = ({ item }) => (
     <MessageItem item={item} handleClickMessage={handleClickMessage} />
   );
 
+  // Get messages from api
   const getMessages = useCallback(async () => {
-    setLoading(true);
     try {
-      const res = await api.get<{ messages: IMessage[] }>('/read');
-      console.log('Messages', res.data);
-      setMessages(res.data.messages);
+      const res = await api.get<{ messages: IMessage[] }>('/read', {
+        params: { page },
+      });
+      updateMessages(res.data.messages, page > 1);
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      if (refreshing) {
+        setRefreshing(false);
+      }
     }
-  }, [setMessages]);
+  }, [updateMessages, refreshing, page]);
+
+  // Goes back to first page and refreshes
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setPage(1);
+  };
+
+  // Increments page number
+  const handleNextPage = () => setPage(p => p + 1);
 
   useEffect(() => {
     getMessages();
@@ -56,8 +73,9 @@ const MessageList: React.FC<
           data={messages.sort((a, b) => b.timestamp - a.timestamp)}
           renderItem={handleRenderItem}
           keyExtractor={item => item.id.toString()}
-          refreshing={loading}
-          onRefresh={getMessages}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          onEndReached={handleNextPage}
         />
       </UpperContainer>
     </>

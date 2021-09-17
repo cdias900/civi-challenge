@@ -6,6 +6,7 @@ import { MessagesProvider } from '@hooks/useMessages';
 import MessageList from './MessageList';
 import MessageDetail from './MessageDetail';
 
+// Route types
 export type IMessageRoutes = {
   MessageList: undefined;
   MessageDetail: undefined;
