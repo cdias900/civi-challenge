@@ -1,4 +1,4 @@
-import { isSameDay, format } from 'date-fns';
+import { isSameDay, isSameYear, format } from 'date-fns';
 
 /**
  * Returns a formatted date string from the given timestamp
@@ -10,5 +10,8 @@ export function getDateString(timestamp: number): string {
   if (isSameDay(msTimestamp, new Date())) {
     return format(msTimestamp, 'HH:mm');
   }
-  return format(msTimestamp, 'MMM dd');
+  if (isSameYear(msTimestamp, new Date())) {
+    return format(msTimestamp, 'MMM dd');
+  }
+  return format(msTimestamp, 'dd/MM/yyyy');
 }
