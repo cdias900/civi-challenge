@@ -60,7 +60,8 @@
     "react/jsx-props-no-spreading": "off",
     "no-nested-ternary": "off",
     "@typescript-eslint/ban-ts-comment": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {
